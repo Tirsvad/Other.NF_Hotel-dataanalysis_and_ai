@@ -7,6 +7,7 @@ from nf_hotel_api.domain.metadata import HotelMetadata
 from nf_hotel_api.repositories.metadata_repository import JsonHotelMetadataRepository
 from nf_hotel_api.services.cleaning import DataCleaningService
 from nf_hotel_api.services.llm_report import LLMReportService
+from nf_hotel_api.services.public_holidays import PublicHolidayCalendar
 from nf_hotel_api.services.report import ReportService
 from nf_hotel_api.services.statistics import DescriptiveStatsService
 
@@ -33,6 +34,7 @@ def get_llm_service(
 ) -> LLMReportService:
     return LLMReportService(
         metadata=metadata,
+        holiday_calendar=PublicHolidayCalendar(),
         base_url=settings.llm_base_url,
         api_key=settings.llm_api_key,
         model=settings.llm_model,

@@ -1,0 +1,473 @@
+{
+  "country": "KH",
+  "source": "python-holidays 0.104",
+  "first_year": 2022,
+  "last_year": 2027,
+  "holidays": [
+    {
+      "name": "International New Year Day",
+      "start_date": "2022-01-01",
+      "end_date": "2022-01-01"
+    },
+    {
+      "name": "Day of Victory over the Genocidal Regime",
+      "start_date": "2022-01-07",
+      "end_date": "2022-01-07"
+    },
+    {
+      "name": "International Women's Rights Day",
+      "start_date": "2022-03-08",
+      "end_date": "2022-03-08"
+    },
+    {
+      "name": "Khmer New Year's Day",
+      "start_date": "2022-04-14",
+      "end_date": "2022-04-16"
+    },
+    {
+      "name": "International Labor Day",
+      "start_date": "2022-05-01",
+      "end_date": "2022-05-01"
+    },
+    {
+      "name": "HM King Norodom Sihamoni's Birthday",
+      "start_date": "2022-05-14",
+      "end_date": "2022-05-14"
+    },
+    {
+      "name": "Visaka Bochea Day",
+      "start_date": "2022-05-15",
+      "end_date": "2022-05-15"
+    },
+    {
+      "name": "Royal Ploughing Ceremony",
+      "start_date": "2022-05-19",
+      "end_date": "2022-05-19"
+    },
+    {
+      "name": "HM Queen Norodom Monineath Sihanouk the Queen-Mother's Birthday",
+      "start_date": "2022-06-18",
+      "end_date": "2022-06-18"
+    },
+    {
+      "name": "Constitution Day; Pchum Ben Day",
+      "start_date": "2022-09-24",
+      "end_date": "2022-09-24"
+    },
+    {
+      "name": "Pchum Ben Day",
+      "start_date": "2022-09-25",
+      "end_date": "2022-09-26"
+    },
+    {
+      "name": "HM King Norodom Sihanouk Mourning Day",
+      "start_date": "2022-10-15",
+      "end_date": "2022-10-15"
+    },
+    {
+      "name": "HM King Norodom Sihamoni's Coronation Day",
+      "start_date": "2022-10-29",
+      "end_date": "2022-10-29"
+    },
+    {
+      "name": "Water Festival",
+      "start_date": "2022-11-07",
+      "end_date": "2022-11-08"
+    },
+    {
+      "name": "National Independence Day; Water Festival",
+      "start_date": "2022-11-09",
+      "end_date": "2022-11-09"
+    },
+    {
+      "name": "International New Year Day",
+      "start_date": "2023-01-01",
+      "end_date": "2023-01-01"
+    },
+    {
+      "name": "Day of Victory over the Genocidal Regime",
+      "start_date": "2023-01-07",
+      "end_date": "2023-01-07"
+    },
+    {
+      "name": "International Women's Rights Day",
+      "start_date": "2023-03-08",
+      "end_date": "2023-03-08"
+    },
+    {
+      "name": "Khmer New Year's Day",
+      "start_date": "2023-04-14",
+      "end_date": "2023-04-16"
+    },
+    {
+      "name": "International Labor Day",
+      "start_date": "2023-05-01",
+      "end_date": "2023-05-01"
+    },
+    {
+      "name": "Visaka Bochea Day",
+      "start_date": "2023-05-04",
+      "end_date": "2023-05-04"
+    },
+    {
+      "name": "Royal Ploughing Ceremony",
+      "start_date": "2023-05-08",
+      "end_date": "2023-05-08"
+    },
+    {
+      "name": "HM King Norodom Sihamoni's Birthday",
+      "start_date": "2023-05-14",
+      "end_date": "2023-05-14"
+    },
+    {
+      "name": "HM Queen Norodom Monineath Sihanouk the Queen-Mother's Birthday",
+      "start_date": "2023-06-18",
+      "end_date": "2023-06-18"
+    },
+    {
+      "name": "Constitution Day",
+      "start_date": "2023-09-24",
+      "end_date": "2023-09-24"
+    },
+    {
+      "name": "Pchum Ben Day",
+      "start_date": "2023-10-13",
+      "end_date": "2023-10-14"
+    },
+    {
+      "name": "HM King Norodom Sihanouk Mourning Day; Pchum Ben Day",
+      "start_date": "2023-10-15",
+      "end_date": "2023-10-15"
+    },
+    {
+      "name": "HM King Norodom Sihamoni's Coronation Day",
+      "start_date": "2023-10-29",
+      "end_date": "2023-10-29"
+    },
+    {
+      "name": "National Independence Day",
+      "start_date": "2023-11-09",
+      "end_date": "2023-11-09"
+    },
+    {
+      "name": "Water Festival",
+      "start_date": "2023-11-26",
+      "end_date": "2023-11-28"
+    },
+    {
+      "name": "International New Year Day",
+      "start_date": "2024-01-01",
+      "end_date": "2024-01-01"
+    },
+    {
+      "name": "Day of Victory over the Genocidal Regime",
+      "start_date": "2024-01-07",
+      "end_date": "2024-01-07"
+    },
+    {
+      "name": "International Women's Rights Day",
+      "start_date": "2024-03-08",
+      "end_date": "2024-03-08"
+    },
+    {
+      "name": "Khmer New Year's Day",
+      "start_date": "2024-04-13",
+      "end_date": "2024-04-16"
+    },
+    {
+      "name": "International Labor Day",
+      "start_date": "2024-05-01",
+      "end_date": "2024-05-01"
+    },
+    {
+      "name": "HM King Norodom Sihamoni's Birthday",
+      "start_date": "2024-05-14",
+      "end_date": "2024-05-14"
+    },
+    {
+      "name": "Visaka Bochea Day",
+      "start_date": "2024-05-22",
+      "end_date": "2024-05-22"
+    },
+    {
+      "name": "Royal Ploughing Ceremony",
+      "start_date": "2024-05-26",
+      "end_date": "2024-05-26"
+    },
+    {
+      "name": "HM Queen Norodom Monineath Sihanouk the Queen-Mother's Birthday",
+      "start_date": "2024-06-18",
+      "end_date": "2024-06-18"
+    },
+    {
+      "name": "Constitution Day",
+      "start_date": "2024-09-24",
+      "end_date": "2024-09-24"
+    },
+    {
+      "name": "Pchum Ben Day",
+      "start_date": "2024-10-01",
+      "end_date": "2024-10-03"
+    },
+    {
+      "name": "HM King Norodom Sihanouk Mourning Day",
+      "start_date": "2024-10-15",
+      "end_date": "2024-10-15"
+    },
+    {
+      "name": "HM King Norodom Sihamoni's Coronation Day",
+      "start_date": "2024-10-29",
+      "end_date": "2024-10-29"
+    },
+    {
+      "name": "National Independence Day",
+      "start_date": "2024-11-09",
+      "end_date": "2024-11-09"
+    },
+    {
+      "name": "Water Festival",
+      "start_date": "2024-11-14",
+      "end_date": "2024-11-16"
+    },
+    {
+      "name": "Peace Day in Cambodia",
+      "start_date": "2024-12-29",
+      "end_date": "2024-12-29"
+    },
+    {
+      "name": "International New Year Day",
+      "start_date": "2025-01-01",
+      "end_date": "2025-01-01"
+    },
+    {
+      "name": "Day of Victory over the Genocidal Regime",
+      "start_date": "2025-01-07",
+      "end_date": "2025-01-07"
+    },
+    {
+      "name": "International Women's Rights Day",
+      "start_date": "2025-03-08",
+      "end_date": "2025-03-08"
+    },
+    {
+      "name": "Khmer New Year's Day",
+      "start_date": "2025-04-14",
+      "end_date": "2025-04-16"
+    },
+    {
+      "name": "International Labor Day",
+      "start_date": "2025-05-01",
+      "end_date": "2025-05-01"
+    },
+    {
+      "name": "Visaka Bochea Day",
+      "start_date": "2025-05-11",
+      "end_date": "2025-05-11"
+    },
+    {
+      "name": "HM King Norodom Sihamoni's Birthday",
+      "start_date": "2025-05-14",
+      "end_date": "2025-05-14"
+    },
+    {
+      "name": "Royal Ploughing Ceremony",
+      "start_date": "2025-05-15",
+      "end_date": "2025-05-15"
+    },
+    {
+      "name": "HM Queen Norodom Monineath Sihanouk the Queen-Mother's Birthday",
+      "start_date": "2025-06-18",
+      "end_date": "2025-06-18"
+    },
+    {
+      "name": "Pchum Ben Day",
+      "start_date": "2025-09-21",
+      "end_date": "2025-09-23"
+    },
+    {
+      "name": "Constitution Day",
+      "start_date": "2025-09-24",
+      "end_date": "2025-09-24"
+    },
+    {
+      "name": "HM King Norodom Sihanouk Mourning Day",
+      "start_date": "2025-10-15",
+      "end_date": "2025-10-15"
+    },
+    {
+      "name": "HM King Norodom Sihamoni's Coronation Day",
+      "start_date": "2025-10-29",
+      "end_date": "2025-10-29"
+    },
+    {
+      "name": "Water Festival",
+      "start_date": "2025-11-04",
+      "end_date": "2025-11-06"
+    },
+    {
+      "name": "National Independence Day",
+      "start_date": "2025-11-09",
+      "end_date": "2025-11-09"
+    },
+    {
+      "name": "Peace Day in Cambodia",
+      "start_date": "2025-12-29",
+      "end_date": "2025-12-29"
+    },
+    {
+      "name": "International New Year Day",
+      "start_date": "2026-01-01",
+      "end_date": "2026-01-01"
+    },
+    {
+      "name": "Day of Victory over the Genocidal Regime",
+      "start_date": "2026-01-07",
+      "end_date": "2026-01-07"
+    },
+    {
+      "name": "International Women's Rights Day",
+      "start_date": "2026-03-08",
+      "end_date": "2026-03-08"
+    },
+    {
+      "name": "Khmer New Year's Day",
+      "start_date": "2026-04-14",
+      "end_date": "2026-04-16"
+    },
+    {
+      "name": "International Labor Day; Visaka Bochea Day",
+      "start_date": "2026-05-01",
+      "end_date": "2026-05-01"
+    },
+    {
+      "name": "Royal Ploughing Ceremony",
+      "start_date": "2026-05-05",
+      "end_date": "2026-05-05"
+    },
+    {
+      "name": "HM King Norodom Sihamoni's Birthday",
+      "start_date": "2026-05-14",
+      "end_date": "2026-05-14"
+    },
+    {
+      "name": "HM Queen Norodom Monineath Sihanouk the Queen-Mother's Birthday",
+      "start_date": "2026-06-18",
+      "end_date": "2026-06-18"
+    },
+    {
+      "name": "Constitution Day",
+      "start_date": "2026-09-24",
+      "end_date": "2026-09-24"
+    },
+    {
+      "name": "Pchum Ben Day",
+      "start_date": "2026-10-10",
+      "end_date": "2026-10-12"
+    },
+    {
+      "name": "HM King Norodom Sihanouk Mourning Day",
+      "start_date": "2026-10-15",
+      "end_date": "2026-10-15"
+    },
+    {
+      "name": "HM King Norodom Sihamoni's Coronation Day",
+      "start_date": "2026-10-29",
+      "end_date": "2026-10-29"
+    },
+    {
+      "name": "National Independence Day",
+      "start_date": "2026-11-09",
+      "end_date": "2026-11-09"
+    },
+    {
+      "name": "Water Festival",
+      "start_date": "2026-11-23",
+      "end_date": "2026-11-25"
+    },
+    {
+      "name": "Peace Day in Cambodia",
+      "start_date": "2026-12-29",
+      "end_date": "2026-12-29"
+    },
+    {
+      "name": "International New Year Day",
+      "start_date": "2027-01-01",
+      "end_date": "2027-01-01"
+    },
+    {
+      "name": "Day of Victory over the Genocidal Regime",
+      "start_date": "2027-01-07",
+      "end_date": "2027-01-07"
+    },
+    {
+      "name": "International Women's Rights Day",
+      "start_date": "2027-03-08",
+      "end_date": "2027-03-08"
+    },
+    {
+      "name": "Khmer New Year's Day",
+      "start_date": "2027-04-14",
+      "end_date": "2027-04-16"
+    },
+    {
+      "name": "International Labor Day",
+      "start_date": "2027-05-01",
+      "end_date": "2027-05-01"
+    },
+    {
+      "name": "HM King Norodom Sihamoni's Birthday",
+      "start_date": "2027-05-14",
+      "end_date": "2027-05-14"
+    },
+    {
+      "name": "Visaka Bochea Day",
+      "start_date": "2027-05-20",
+      "end_date": "2027-05-20"
+    },
+    {
+      "name": "Royal Ploughing Ceremony",
+      "start_date": "2027-05-24",
+      "end_date": "2027-05-24"
+    },
+    {
+      "name": "HM Queen Norodom Monineath Sihanouk the Queen-Mother's Birthday",
+      "start_date": "2027-06-18",
+      "end_date": "2027-06-18"
+    },
+    {
+      "name": "Constitution Day",
+      "start_date": "2027-09-24",
+      "end_date": "2027-09-24"
+    },
+    {
+      "name": "Pchum Ben Day",
+      "start_date": "2027-09-29",
+      "end_date": "2027-10-01"
+    },
+    {
+      "name": "HM King Norodom Sihanouk Mourning Day",
+      "start_date": "2027-10-15",
+      "end_date": "2027-10-15"
+    },
+    {
+      "name": "HM King Norodom Sihamoni's Coronation Day",
+      "start_date": "2027-10-29",
+      "end_date": "2027-10-29"
+    },
+    {
+      "name": "National Independence Day",
+      "start_date": "2027-11-09",
+      "end_date": "2027-11-09"
+    },
+    {
+      "name": "Water Festival",
+      "start_date": "2027-11-12",
+      "end_date": "2027-11-14"
+    },
+    {
+      "name": "Peace Day in Cambodia",
+      "start_date": "2027-12-29",
+      "end_date": "2027-12-29"
+    }
+  ]
+}

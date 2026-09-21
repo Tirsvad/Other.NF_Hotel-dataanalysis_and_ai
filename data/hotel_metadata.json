@@ -1,8 +1,114 @@
 {
   "hotel": "NF Hotel",
+  "address": {
+    "street": "Street 172",
+    "city": "Phnom Penh",
+    "country": "Cambodia"
+  },
   "currency": "USD",
   "room_types": {
-    "A": { "size": "Small", "standard_price_per_night": 20, "room_count": null },
-    "B": { "size": "Large", "standard_price_per_night": 25, "room_count": null }
-  }
+    "A": {
+      "size": "Small",
+      "standard_price_per_night": 20,
+      "room_count": 10
+    },
+    "B": {
+      "size": "Large",
+      "standard_price_per_night": 25,
+      "room_count": 10
+    }
+  },
+  "nearby_events": [
+    {
+      "name": "40th and 41st ASEAN Summits and Related Summits",
+      "start_date": "2022-11-10",
+      "end_date": "2022-11-13",
+      "venue": "Phnom Penh",
+      "source_url": "https://www.pmo.gov.sg/Newsroom/PM-Lee-Hsien-Loong-to-attend-the-40th-and-41st-ASEAN-Summits-and-Related-Summits-in-Cambodia-2022"
+    },
+    {
+      "name": "2023 SEA Games (Southeast Asian Games)",
+      "start_date": "2023-05-05",
+      "end_date": "2023-05-17",
+      "venue": "Morodok Techo Sports Complex (Chroy Changvar), Olympic Sports Complex, Chroy Changvar Convention Centre",
+      "source_url": "https://en.wikipedia.org/wiki/2023_SEA_Games"
+    },
+    {
+      "name": "12th ASEAN Para Games",
+      "start_date": "2023-06-03",
+      "end_date": "2023-06-09",
+      "venue": "Morodok Techo National Stadium",
+      "source_url": "https://en.wikipedia.org/wiki/2023_ASEAN_Para_Games"
+    },
+    {
+      "name": "Phnom Penh International Half Marathon",
+      "start_date": "2023-06-11",
+      "end_date": "2023-06-11",
+      "venue": "Phnom Penh",
+      "source_url": "https://aims-worldrunning.org/races/10059.html"
+    },
+    {
+      "name": "Phnom Penh International Half Marathon",
+      "start_date": "2024-06-16",
+      "end_date": "2024-06-16",
+      "venue": "Phnom Penh",
+      "source_url": "https://aims-worldrunning.org/races/10059.html"
+    },
+    {
+      "name": "Miss Grand Cambodia 2024 final",
+      "start_date": "2024-07-12",
+      "end_date": "2024-07-12",
+      "venue": "Koh Pich Theater",
+      "source_url": "https://en.wikipedia.org/wiki/Miss_Grand_Cambodia_2024"
+    },
+    {
+      "name": "CAMFOOD & CAMHOTEL 2024 trade fair",
+      "start_date": "2024-11-06",
+      "end_date": "2024-11-08",
+      "venue": "Diamond Island Convention & Exhibition Center",
+      "source_url": "https://www.tradeindia.com/tradeshows/venue/diamond-island-convention-exhibition-center-diecc/1173/"
+    },
+    {
+      "name": "Cambodia ASEAN Business Summit 2025",
+      "start_date": "2025-03-06",
+      "end_date": "2025-03-06",
+      "venue": "Sofitel Phnom Penh Phokeetra",
+      "source_url": "https://cambodiainvestmentreview.com/2025/01/30/cambodia-asean-business-summit-2025-set-for-march-6-at-sofitel-phnom-penh/"
+    },
+    {
+      "name": "2025 AFC Challenge League final",
+      "start_date": "2025-05-10",
+      "end_date": "2025-05-10",
+      "venue": "Phnom Penh",
+      "source_url": "https://en.wikipedia.org/wiki/2025_AFC_Challenge_League_final"
+    },
+    {
+      "name": "Phnom Penh International Half Marathon",
+      "start_date": "2025-06-15",
+      "end_date": "2025-06-15",
+      "venue": "Phnom Penh",
+      "source_url": "https://aims-worldrunning.org/races/10059.html"
+    },
+    {
+      "name": "Mekong Forum 2025",
+      "start_date": "2025-07-30",
+      "end_date": "2025-07-31",
+      "venue": "Shangri-La Hotel Phnom Penh",
+      "source_url": "https://mekonginstitute.org/mekong-forum-2025/"
+    },
+    {
+      "name": "CamboP&ELight 2025 trade fair",
+      "start_date": "2025-08-06",
+      "end_date": "2025-08-09",
+      "venue": "Diamond Island Convention & Exhibition Center",
+      "source_url": "https://www.tradeindia.com/tradeshows/venue/diamond-island-convention-exhibition-center-diecc/1173/"
+    },
+    {
+      "name": "Phnom Penh Design Festival 2025",
+      "start_date": "2025-10-31",
+      "end_date": "2025-11-02",
+      "venue": "Factory Phnom Penh",
+      "source_url": "https://ppua.edu.kh/events/ppdf/"
+    }
+  ]
 }

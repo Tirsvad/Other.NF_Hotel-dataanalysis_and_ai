@@ -78,3 +78,34 @@ async def test_generate_report_raises_llm_service_error_on_bad_response(monkeypa
 
     with pytest.raises(LLMServiceError):
         await service.generate_report({"adults": {"mean": 2}})
+
+
+def _service_with_context(**kwargs):
+    from nf_hotel_api.domain.metadata import HotelMetadata, RoomType
+    from nf_hotel_api.services.public_holidays import PublicHolidayCalendar
+
+    metadata = HotelMetadata(
+        hotel="NF Hotel",
+        room_types={"A": RoomType(size="Small", standard_price_per_night=20, room_count=10)},
+    )
+    return LLMReportService(
+        base_url="http://fake/v1", api_key="k", model="m", timeout_seconds=1.0,
+        metadata=metadata, holiday_calendar=PublicHolidayCalendar(), **kwargs,
+    )
+
+
+def test_prompt_lists_public_holidays_for_the_years_in_the_data():
+    stats = {"arrival_date": {"min": "2024-01-03T00:00:00", "max": "2024-12-30T00:00:00"}}
+
+    prompt = _service_with_context()._build_prompt(stats)
+
+    assert "Public holidays:" in prompt
+    assert "2024-04-13 to 2024-04-16" in prompt
+    assert "2023-" not in prompt.split("We have extract")[0]
+
+
+def test_prompt_skips_holidays_when_arrival_dates_are_unknown():
+    prompt = _service_with_context()._build_prompt({"adults": {"mean": 2}})
+
+    assert "Public holidays" not in prompt
+    assert "Room type A: Small" in prompt

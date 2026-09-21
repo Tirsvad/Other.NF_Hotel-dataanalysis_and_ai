@@ -109,6 +109,6 @@ def hotel_metadata() -> HotelMetadata:
         currency="USD",
         room_types={
             "A": RoomType(size="Small", standard_price_per_night=20, room_count=10),
-            "B": RoomType(size="Large", standard_price_per_night=25, room_count=5),
+            "B": RoomType(size="Large", standard_price_per_night=25, room_count=10),
         },
     )

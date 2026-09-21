@@ -5,6 +5,7 @@ from typing import Any
 import httpx
 
 from nf_hotel_api.domain.metadata import HotelMetadata
+from nf_hotel_api.services.public_holidays import PublicHolidayCalendar
 
 _PROMPT_TEMPLATE = """You work as a data analyst and in marketing to optimize hotel operations.
 User cannot interact with you so do not ask questions.
@@ -16,7 +17,7 @@ _HOTEL_CONTEXT_TEMPLATE = """Hotel reference data (room types the bookings refer
 {room_catalogue}
 The column prize_per_nigth is the price the customer actually paid per night.
 The column revenue is nights x prize_per_nigth for non-cancelled bookings.
-"""
+{holidays}"""
 
 # Reasoning models (e.g. Qwen3) may wrap their internal reasoning in
 # <think>...</think>; that content must never reach the API response.
@@ -37,23 +38,17 @@ class LLMReportService:
         model: str,
         timeout_seconds: float,
         metadata: HotelMetadata | None = None,
+        holiday_calendar: PublicHolidayCalendar | None = None,
     ) -> None:
         self._metadata = metadata
+        self._holiday_calendar = holiday_calendar
         self._base_url = base_url.rstrip("/")
         self._api_key = api_key
         self._model = model
         self._timeout_seconds = timeout_seconds
 
     async def generate_report(self, descriptive_stats: dict[str, Any]) -> str:
-        hotel_context = (
-            _HOTEL_CONTEXT_TEMPLATE.format(room_catalogue=self._metadata.describe())
-            if self._metadata
-            else ""
-        )
-        prompt = _PROMPT_TEMPLATE.format(
-            hotel_context=hotel_context,
-            descriptive_analysis_data=json.dumps(descriptive_stats, indent=2),
-        )
+        prompt = self._build_prompt(descriptive_stats)
 
         payload = {
             "model": self._model,
@@ -80,6 +75,32 @@ class LLMReportService:
             raise LLMServiceError(f"Unexpected LLM response shape: {data}") from exc
 
         return self._strip_thinking(raw_content)
+
+    def _build_prompt(self, descriptive_stats: dict[str, Any]) -> str:
+        hotel_context = (
+            _HOTEL_CONTEXT_TEMPLATE.format(
+                room_catalogue=self._metadata.describe(),
+                holidays=self._holiday_section(descriptive_stats),
+            )
+            if self._metadata
+            else ""
+        )
+        return _PROMPT_TEMPLATE.format(
+            hotel_context=hotel_context,
+            descriptive_analysis_data=json.dumps(descriptive_stats, indent=2),
+        )
+
+    def _holiday_section(self, descriptive_stats: dict[str, Any]) -> str:
+        """Public holidays for the years the bookings' arrival dates span."""
+        if self._holiday_calendar is None:
+            return ""
+        arrival = descriptive_stats.get("arrival_date", {})
+        try:
+            first_year = int(str(arrival["min"])[:4])
+            last_year = int(str(arrival["max"])[:4])
+        except (KeyError, ValueError):
+            return ""
+        return f"Public holidays:\n{self._holiday_calendar.describe(first_year, last_year)}\n"
 
     @staticmethod
     def _strip_thinking(content: str) -> str:
