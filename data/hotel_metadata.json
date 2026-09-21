@@ -1,0 +1,8 @@
+{
+  "hotel": "NF Hotel",
+  "currency": "USD",
+  "room_types": {
+    "A": { "size": "Small", "standard_price_per_night": 20, "room_count": null },
+    "B": { "size": "Large", "standard_price_per_night": 25, "room_count": null }
+  }
+}

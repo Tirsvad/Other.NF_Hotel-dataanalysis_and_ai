@@ -1,0 +1,160 @@
+# Classes vs. functions: why each file is shaped the way it is
+
+The brief asked for a class-based project. That rule is applied wherever a
+file actually has **state** (constructor arguments it reuses) or is one of
+**several interchangeable implementations of the same contract**. Where a
+file is one-shot, stateless glue code that a framework (FastAPI) expects in
+a specific shape, it is left as a plain function - wrapping it in a class
+would just be a single-method class, i.e. a function wearing a costume.
+
+Rule of thumb used throughout:
+
+- **Class** - has constructor state it reuses across methods, groups several
+  related private steps behind one public operation, or is one of multiple
+  interchangeable implementations of an abstract contract (repositories).
+- **Function** - a single, stateless piece of wiring/glue, especially where
+  the framework itself expects a plain callable (FastAPI route handlers,
+  dependency providers).
+
+This mirrors Clean Architecture's layering: the inner layers (domain,
+services, repositories) hold the real behavior and are classes; the
+outermost layer (API/framework glue) is intentionally thin and written the
+way FastAPI wants it - plain functions.
+
+## Domain layer
+
+### `src/nf_hotel_api/domain/schemas.py` - classes: `Booking`, `BookingBatch`, `ReportResponse`
+
+Pydantic `BaseModel` subclasses. This is not a style choice: Pydantic
+requires a class to generate field validation, JSON (de)serialization, and
+the OpenAPI schema FastAPI exposes at `/docs`. Each class is a **data
+contract**, not behavior - no methods, just typed fields.
+
+### `src/nf_hotel_api/domain/metadata.py` - classes: `RoomType`, `HotelMetadata`
+
+Pydantic models for the reference data in `data/hotel_metadata.json`: per room
+type its size, standard price per night and (optional) number of rooms.
+`HotelMetadata.describe()` renders the catalogue as text for the LLM prompt.
+
+## Core (config & security)
+
+### `src/nf_hotel_api/core/config.py` - class `Settings` + function `get_settings()`
+
+`Settings` is a `pydantic-settings` `BaseSettings` subclass - again required
+by the library to get typed, validated configuration loaded from the
+environment / `.env`. `get_settings()` is a two-line factory wrapped in
+`@lru_cache` so the `Settings` object is built once and reused; a function
+is all that's needed to memoize a constructor call.
+
+### `src/nf_hotel_api/core/security.py` - class `ApiKeyAuthenticator`
+
+Implemented as a class with `__call__` so a single instance
+(`require_api_key = ApiKeyAuthenticator()`) can be reused as a FastAPI
+dependency across every protected route. Being a class also makes it
+trivial to unit test in isolation and to extend later (e.g. multiple valid
+keys, per-key rate limiting) without touching every route that depends on
+it.
+
+## Repository layer
+
+### `src/nf_hotel_api/repositories/metadata_repository.py` - class `JsonHotelMetadataRepository`
+
+Loads and validates `hotel_metadata.json` into a `HotelMetadata`.
+
+### `src/nf_hotel_api/repositories/booking_repository.py` - classes: `BookingRepository` (ABC), `CsvBookingRepository`, `JsonBookingRepository`
+
+The textbook case for classes: an abstract base class defines one contract
+(`load() -> DataFrame`), and two concrete classes implement it against
+different sources while holding their own state (a file path + separator,
+or a list of JSON records). Every service depends only on the abstract
+`BookingRepository` type, so the CSV source can be swapped for the JSON
+source (or a future database-backed repository) without touching any
+business logic. Plain functions can't express "two interchangeable
+implementations of one contract" this cleanly - that's exactly what
+classes + inheritance are for.
+
+## Services (business logic)
+
+### `src/nf_hotel_api/services/cleaning.py` - class `DataCleaningService`
+
+Groups five related private steps (`_fix_wrong_format`,
+`_clean_empty_cells`, `_fix_wrong_data`, `_remove_duplicates`, `_add_pricing`)
+behind one public `clean()` method. It is constructed with a `HotelMetadata`;
+`_add_pricing` keeps the price paid in the CSV, fills missing prices from the
+standard price, and derives `room_size` and `revenue`. The class keeps these steps cohesive, individually
+testable (see `tests/test_cleaning.py`), and lets the whole pipeline be
+swapped out in `ReportService`.
+
+### `src/nf_hotel_api/services/statistics.py` - class `DescriptiveStatsService`
+
+A single-purpose class computing and JSON-serializing `df.describe()`. It
+holds no state today, but is a class for consistency with its sibling
+services and so it can be constructor-injected into `ReportService` the
+same way they are - adding config later (e.g. which percentiles to include)
+won't change any call sites.
+
+### `src/nf_hotel_api/services/llm_report.py` - classes `LLMReportService`, `LLMServiceError`
+
+`LLMReportService` holds real constructor state (`base_url`, `api_key`,
+`model`, `timeout_seconds`) used across its methods, and encapsulates the
+network call plus the thinking-block-stripping post-processing behind one
+`generate_report()` method - a natural fit for a class.
+`LLMServiceError` is a small custom exception type so callers can catch
+"the LLM failed" distinctly from a generic `httpx` error.
+
+### `src/nf_hotel_api/services/report.py` - class `ReportService`
+
+The orchestrator. Takes the other three services as constructor
+dependencies and wires the raw-bookings -> clean -> stats -> LLM pipeline in
+one `generate()` method. This is dependency injection in practice: each
+collaborator is swappable, which is exactly how the tests substitute a fake
+LLM service without touching the real cleaning/statistics logic.
+
+## API layer (FastAPI wiring) - deliberately function-based
+
+### `src/nf_hotel_api/api/deps.py` - functions: `get_cleaning_service`, `get_stats_service`, `get_llm_service`, `get_report_service`
+
+FastAPI dependency-provider functions. FastAPI's `Depends()` system is
+built around plain callables: it inspects a function's parameters and
+return type to build the dependency graph and the OpenAPI schema. Each
+function here does exactly one thing - construct and return a service
+instance - and holds no state of its own, so wrapping it in a class would
+add a layer of indirection with no benefit.
+
+### `src/nf_hotel_api/api/v1/endpoints/report.py` - functions: `generate_report_from_file`, `generate_report_from_json`
+
+Route handlers. FastAPI's `@router.post(...)` decorators are applied to
+functions; this is the idiomatic (and for FastAPI, effectively required)
+shape for an endpoint. Each handler is stateless - it receives its
+dependencies via `Depends(...)` and immediately delegates to the
+class-based service layer to do the actual work.
+
+### `src/nf_hotel_api/api/v1/router.py` - no functions or classes, just module-level wiring
+
+Purely declarative: creates one `APIRouter` and registers the report
+router on it. There is no behavior here to encapsulate in either a
+function or a class.
+
+### `src/nf_hotel_api/main.py` - module-level app + function `health_check`
+
+Creates the FastAPI app instance and registers middleware/routers at import
+time - this file is the composition root. `health_check` is a trivial,
+stateless liveness probe; a single-method class here would add nothing
+over a function.
+
+## Summary table
+
+| File | Shape | Why |
+|---|---|---|
+| `domain/schemas.py` | Classes (Pydantic models) | Required by Pydantic/FastAPI for validation + OpenAPI schema |
+| `core/config.py` | Class (`Settings`) + factory function | `BaseSettings` requires a class; caching a constructor call only needs a function |
+| `core/security.py` | Class | Reusable, testable, extensible FastAPI dependency object |
+| `repositories/booking_repository.py` | Classes (ABC + 2 impls) | Interchangeable implementations of one contract - inheritance/polymorphism |
+| `services/cleaning.py` | Class | Groups related private steps behind one public operation |
+| `services/statistics.py` | Class | Consistency with sibling services; injectable into `ReportService` |
+| `services/llm_report.py` | Classes | Holds constructor state (URL, key, model, timeout) used across methods |
+| `services/report.py` | Class | Orchestrator with injected, swappable collaborators |
+| `api/deps.py` | Functions | FastAPI `Depends()` expects plain callables; no state to hold |
+| `api/v1/endpoints/report.py` | Functions | FastAPI route handlers must be functions; stateless delegation |
+| `api/v1/router.py` | Module-level wiring | No behavior to encapsulate |
+| `main.py` | Module-level app + 1 function | Composition root; trivial health check |

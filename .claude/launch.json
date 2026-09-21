@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "nf-hotel-api",
+      "runtimeExecutable": ".venv/Scripts/python.exe",
+      "runtimeArgs": ["-m", "uvicorn", "nf_hotel_api.main:app", "--app-dir", "src", "--port", "8000"],
+      "port": 8000
+    }
+  ]
+}
